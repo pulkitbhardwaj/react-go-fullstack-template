@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "session",
+    srcs = [
+        "context.go",
+        "store.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/voice/api/accounts/session",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_gorilla_sessions//:sessions"],
+)

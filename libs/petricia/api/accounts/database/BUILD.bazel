@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "database",
+    srcs = [
+        "database.go",
+        "user.service.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/petricia/api/accounts/database",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/petricia/api/accounts/entities",
+        "//libs/petricia/api/accounts/inputs",
+        "@io_gorm_driver_postgres//:postgres",
+        "@io_gorm_gorm//:gorm",
+    ],
+)

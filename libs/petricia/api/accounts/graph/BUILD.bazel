@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "graph",
+    srcs = [
+        "federation.go",
+        "graphql.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/petricia/api/accounts/graph",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/petricia/api/accounts/entities",
+        "//libs/petricia/api/accounts/enums",
+        "//libs/petricia/api/accounts/inputs",
+        "@com_github_99designs_gqlgen//graphql",
+        "@com_github_99designs_gqlgen//graphql/introspection",
+        "@com_github_99designs_gqlgen//plugin/federation/fedruntime",
+        "@com_github_vektah_gqlparser_v2//:gqlparser",
+        "@com_github_vektah_gqlparser_v2//ast",
+    ],
+)

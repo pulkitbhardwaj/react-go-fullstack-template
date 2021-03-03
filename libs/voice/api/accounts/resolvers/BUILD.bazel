@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "resolvers",
+    srcs = [
+        "entity.resolver.go",
+        "mutation.resolver.go",
+        "query.resolver.go",
+        "resolver.go",
+        "user.resolver.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/voice/api/accounts/resolvers",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/voice/api/accounts/auth",
+        "//libs/voice/api/accounts/database",
+        "//libs/voice/api/accounts/entities",
+        "//libs/voice/api/accounts/graph",
+        "//libs/voice/api/accounts/inputs",
+        "//libs/voice/api/accounts/session",
+        "@io_gorm_gorm//:gorm",
+    ],
+)

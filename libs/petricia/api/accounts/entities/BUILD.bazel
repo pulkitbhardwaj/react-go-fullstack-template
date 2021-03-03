@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "entities",
+    srcs = [
+        "entities_gen.go",
+        "user.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/petricia/api/accounts/entities",
+    visibility = ["//visibility:public"],
+    deps = ["//libs/petricia/api/accounts/enums"],
+)

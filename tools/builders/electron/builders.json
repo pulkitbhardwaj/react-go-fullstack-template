@@ -1,0 +1,9 @@
+{
+  "builders": {
+    "build": {
+      "implementation": "./build/build.impl.ts",
+      "schema": "./build/schema.json",
+      "description": "Builds electron project"
+    }
+  }
+}

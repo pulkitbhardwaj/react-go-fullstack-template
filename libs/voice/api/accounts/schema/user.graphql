@@ -1,0 +1,39 @@
+scalar Time
+
+enum Role {
+  ADMIN
+  USER
+  VENDOR
+}
+
+type User @key(fields: "id") {
+  id: ID!
+  firstname: String!
+  lastname: String!
+  username: String!
+  email: String!
+  role: Role!
+  createdAt: Time!
+  updatedAt: Time!
+  deletedAt: Time
+}
+
+input NewUser {
+  firstname: String!
+  lastname: String!
+  username: String!
+  email: String!
+  password: String!
+}
+
+input EditUser {
+  firstname: String!
+  lastname: String!
+  username: String!
+  email: String!
+}
+
+input LoginCredentials {
+  usernameOrEmail: String!
+  password: String!
+}

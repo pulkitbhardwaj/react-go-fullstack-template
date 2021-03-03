@@ -1,0 +1,9 @@
+extend type Mutation {
+  createUser(input: NewUser!): User!
+  updateUser(id: ID!, input: EditUser!): User!
+  deleteUser(id: ID!): Boolean!
+
+  # with Authentication
+  registerUser(input: NewUser!): User!
+  loginUser(input: LoginCredentials!): Boolean!
+}

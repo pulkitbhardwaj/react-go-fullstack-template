@@ -1,0 +1,10 @@
+################################################################################
+#                                      Go                                      #
+################################################################################
+
+# Build with Gazelle
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/pulkitbhardwaj/incroy
+
+gazelle(name = "gazelle")

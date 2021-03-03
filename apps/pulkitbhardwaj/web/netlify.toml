@@ -1,0 +1,6 @@
+[build]
+command = "yarn build pulkitbhardwaj-web"
+publish = "dist/apps/pulkitbhardwaj/web"
+
+[[plugins]]
+package = "@netlify/plugin-nextjs"

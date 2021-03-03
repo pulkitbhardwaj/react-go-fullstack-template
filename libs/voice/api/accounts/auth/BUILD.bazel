@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "auth",
+    srcs = [
+        "context.go",
+        "jwt.go",
+        "token.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/voice/api/accounts/auth",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/voice/api/accounts/database",
+        "//libs/voice/api/accounts/entities",
+        "//libs/voice/api/accounts/session",
+        "@com_github_dgrijalva_jwt_go//:jwt-go",
+        "@com_github_gorilla_sessions//:sessions",
+    ],
+)

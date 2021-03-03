@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "server",
+    srcs = [
+        "middlewares.go",
+        "server.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/petricia/api/accounts/server",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/petricia/api/accounts/database",
+        "//libs/petricia/api/accounts/graph",
+        "//libs/petricia/api/accounts/resolvers",
+        "@com_github_99designs_gqlgen//graphql/handler",
+        "@com_github_99designs_gqlgen//graphql/playground",
+        "@com_github_gorilla_mux//:mux",
+    ],
+)

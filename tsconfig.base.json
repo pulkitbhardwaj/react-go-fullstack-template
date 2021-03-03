@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "strict": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": false,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@incroy/ui/mobile": ["libs/ui/mobile/src/index.ts"],
+      "@incroy/ui/common": ["libs/ui/common/src/index.ts"],
+      "@incroy/voice/ui/web": ["libs/voice/ui/web/src/index.ts"],
+      "@incroy/petricia/ui/common": ["libs/petricia/ui/common/src/index.ts"],
+      "@incroy/petricia/ui/web": ["libs/petricia/ui/web/src/index.ts"],
+      "@incroy/ui/web": ["libs/ui/web/src/index.ts"],
+      "@incroy/graphql/client": ["libs/graphql/client/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

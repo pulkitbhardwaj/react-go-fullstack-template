@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "dataloaders",
+    srcs = [
+        "context.go",
+        "dataloader.go",
+        "userloader_gen.go",
+        "usersliceloader_gen.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/voice/api/accounts/dataloaders",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/voice/api/accounts/database",
+        "//libs/voice/api/accounts/entities",
+    ],
+)

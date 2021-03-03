@@ -1,0 +1,766 @@
+{
+  "version": 2,
+  "projects": {
+    "petricia-web": {
+      "root": "apps/petricia/web",
+      "sourceRoot": "apps/petricia/web",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "root": "apps/petricia/web",
+            "outputPath": "dist/apps/petricia/web"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "deploy": {
+          "executor": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/petricia/web/exported",
+            "siteId": "d9a7a53a-c730-4c85-8310-a88724cfbd02"
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "petricia-web:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "petricia-web:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "petricia-web:build:production"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/petricia/web/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/petricia/web"
+          ],
+          "options": {
+            "jestConfig": "apps/petricia/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "petricia-web-e2e": {
+      "root": "apps/petricia/web-e2e",
+      "sourceRoot": "apps/petricia/web-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/petricia/web-e2e/cypress.json",
+            "tsConfig": "apps/petricia/web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "petricia-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "petricia-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/petricia/web-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "ui-e2e": {
+      "root": "apps/ui-e2e",
+      "sourceRoot": "apps/ui-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ui-e2e/cypress.json",
+            "tsConfig": "apps/ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ui-web:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "ui-web:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/ui-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "petricia-mobile": {
+      "root": "apps/petricia/mobile",
+      "sourceRoot": "apps/petricia/mobile/src",
+      "projectType": "application",
+      "generators": {},
+      "targets": {
+        "start": {
+          "executor": "@nrwl/react-native:start",
+          "options": {
+            "port": 8081
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "nx start mobile"
+          }
+        },
+        "run-ios": {
+          "executor": "@nrwl/react-native:run-ios",
+          "options": {}
+        },
+        "bundle-ios": {
+          "executor": "@nrwl/react-native:bundle",
+          "outputs": [
+            "apps/petricia/mobile/build"
+          ],
+          "options": {
+            "entryFile": "apps/petricia/mobile/src/main.tsx",
+            "platform": "ios",
+            "bundleOutput": "dist/apps/petricia/mobile/ios/main.bundle"
+          }
+        },
+        "run-android": {
+          "executor": "@nrwl/react-native:run-android",
+          "options": {}
+        },
+        "build-android": {
+          "executor": "@nrwl/react-native:build-android",
+          "outputs": [
+            "apps/petricia/mobile/android/app/build/outputs/bundle",
+            "apps/petricia/mobile/android/app/build/outputs/apk"
+          ],
+          "options": {}
+        },
+        "bundle-android": {
+          "executor": "@nrwl/react-native:bundle",
+          "options": {
+            "entryFile": "apps/petricia/mobile/src/main.tsx",
+            "platform": "android",
+            "bundleOutput": "dist/apps/petricia/mobile/android/main.bundle"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/petricia/mobile/**/*.{js,ts,tsx}"
+            ]
+          }
+        },
+        "sync-deps": {
+          "executor": "@nrwl/react-native:sync-deps",
+          "options": {}
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/petricia/mobile/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "petricia-desktop": {
+      "root": "apps/petricia/desktop",
+      "sourceRoot": "apps/petricia/desktop/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/petricia/desktop",
+            "index": "apps/petricia/desktop/src/index.html",
+            "main": "apps/petricia/desktop/src/main.tsx",
+            "polyfills": "apps/petricia/desktop/src/polyfills.ts",
+            "tsConfig": "apps/petricia/desktop/tsconfig.app.json",
+            "assets": [
+              "apps/petricia/desktop/src/favicon.ico",
+              "apps/petricia/desktop/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/petricia/desktop/src/environments/environment.ts",
+                  "with": "apps/petricia/desktop/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "run-desktop": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "node_modules/.bin/concurrently \"BROWSER=none nx serve petricia-desktop\" \"node_modules/.bin/wait-on http://localhost:4200 && node_modules/.bin/electron apps/petricia/desktop/src/electron.js\""
+              }
+            ]
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "petricia-desktop:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "petricia-desktop:build:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/petricia/desktop/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/petricia/desktop"
+          ],
+          "options": {
+            "jestConfig": "apps/petricia/desktop/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "petricia-desktop-e2e": {
+      "root": "apps/petricia/desktop-e2e",
+      "sourceRoot": "apps/petricia/desktop-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/petricia/desktop-e2e/cypress.json",
+            "tsConfig": "apps/petricia/desktop-e2e/tsconfig.e2e.json",
+            "devServerTarget": "petricia-desktop:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "petricia-desktop:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/petricia/desktop-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "ui-mobile": {
+      "root": "libs/ui/mobile",
+      "sourceRoot": "libs/ui/mobile/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/mobile/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ui/mobile"
+          ],
+          "options": {
+            "jestConfig": "libs/ui/mobile/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-common": {
+      "root": "libs/ui/common",
+      "sourceRoot": "libs/ui/common/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/common/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ui/common"
+          ],
+          "options": {
+            "jestConfig": "libs/ui/common/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pulkitbhardwaj-web": {
+      "root": "apps/pulkitbhardwaj/web",
+      "sourceRoot": "apps/pulkitbhardwaj/web",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "root": "apps/pulkitbhardwaj/web",
+            "outputPath": "dist/apps/pulkitbhardwaj/web"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "deploy": {
+          "executor": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/apps/pulkitbhardwaj/web/exported",
+            "siteId": "404e0097-c2f3-4aa5-ae93-17c04b961797"
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "pulkitbhardwaj-web:build",
+            "dev": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "pulkitbhardwaj-web:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "pulkitbhardwaj-web:build:production"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pulkitbhardwaj/web/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/pulkitbhardwaj/web"
+          ],
+          "options": {
+            "jestConfig": "apps/pulkitbhardwaj/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pulkitbhardwaj-web-e2e": {
+      "root": "apps/pulkitbhardwaj/web-e2e",
+      "sourceRoot": "apps/pulkitbhardwaj/web-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pulkitbhardwaj/web-e2e/cypress.json",
+            "tsConfig": "apps/pulkitbhardwaj/web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "pulkitbhardwaj-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pulkitbhardwaj-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pulkitbhardwaj/web-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "voice-web": {
+      "root": "apps/voice/web",
+      "sourceRoot": "apps/voice/web",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "root": "apps/voice/web",
+            "outputPath": "dist/apps/voice/web"
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "voice-web:build",
+            "dev": true,
+            "proxyConfig": "apps/voice/web/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "voice-web:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "voice-web:build:production"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/voice/web/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/voice/web"
+          ],
+          "options": {
+            "jestConfig": "apps/voice/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "relay": {
+          "executor": "@nrwl/workspace:run-commands",
+            "options": {
+              "commands": [
+                {
+                  "command": "npx relay-compiler"
+                }
+              ],
+            "cwd": "apps/voice/web"
+          }
+        }
+      }
+    },
+    "voice-web-e2e": {
+      "root": "apps/voice/web-e2e",
+      "sourceRoot": "apps/voice/web-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/voice/web-e2e/cypress.json",
+            "tsConfig": "apps/voice/web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "voice-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "voice-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/voice/web-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "voice-ui-web": {
+      "root": "libs/voice/ui/web",
+      "sourceRoot": "libs/voice/ui/web/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/voice/ui/web/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/voice/ui/web"
+          ],
+          "options": {
+            "jestConfig": "libs/voice/ui/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "petricia-ui-common": {
+      "root": "libs/petricia/ui/common",
+      "sourceRoot": "libs/petricia/ui/common/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/petricia/ui/common/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/petricia/ui/common"
+          ],
+          "options": {
+            "jestConfig": "libs/petricia/ui/common/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "petricia-ui-web": {
+      "root": "libs/petricia/ui/web",
+      "sourceRoot": "libs/petricia/ui/web/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/petricia/ui/web/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/petricia/ui/web"
+          ],
+          "options": {
+            "jestConfig": "libs/petricia/ui/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-web": {
+      "root": "libs/ui/web",
+      "sourceRoot": "libs/ui/web/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/web/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ui/web"
+          ],
+          "options": {
+            "jestConfig": "libs/ui/web/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "voice-api-gateway": {
+      "root": "apps/voice/api/gateway",
+      "sourceRoot": "apps/voice/api/gateway/src",
+      "projectType": "application",
+      "prefix": "voice-api-gateway",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": [
+            "{options.outputPath}"
+          ],
+          "options": {
+            "outputPath": "dist/apps/voice/api/gateway",
+            "main": "apps/voice/api/gateway/src/main.ts",
+            "tsConfig": "apps/voice/api/gateway/tsconfig.app.json",
+            "assets": [
+              "apps/voice/api/gateway/src/assets"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/voice/api/gateway/src/environments/environment.ts",
+                  "with": "apps/voice/api/gateway/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "voice-api-gateway:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/voice/api/gateway/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/voice/api/gateway"
+          ],
+          "options": {
+            "jestConfig": "apps/voice/api/gateway/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "graphql-client": {
+      "root": "libs/graphql/client",
+      "sourceRoot": "libs/graphql/client/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/graphql/client/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/graphql/client"
+          ],
+          "options": {
+            "jestConfig": "libs/graphql/client/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "styled-components"
+      },
+      "library": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "petricia-web"
+}

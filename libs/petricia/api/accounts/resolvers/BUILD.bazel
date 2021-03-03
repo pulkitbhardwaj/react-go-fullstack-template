@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "resolvers",
+    srcs = [
+        "entity.resolver.go",
+        "mutation.resolver.go",
+        "query.resolver.go",
+        "resolver.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/petricia/api/accounts/resolvers",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/petricia/api/accounts/database",
+        "//libs/petricia/api/accounts/entities",
+        "//libs/petricia/api/accounts/graph",
+        "//libs/petricia/api/accounts/inputs",
+    ],
+)

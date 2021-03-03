@@ -1,0 +1,73 @@
+directive @external on FIELD_DEFINITION
+directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
+directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
+directive @key(fields: _FieldSet!) on OBJECT | INTERFACE
+directive @extends on OBJECT
+scalar _Any
+
+union _Entity = User
+scalar _FieldSet
+
+type _Service {
+  sdl: String
+}
+
+input EditUser {
+  firstname: String!
+  lastname: String!
+  username: String!
+  email: String!
+}
+
+type Entity {
+  findUserByID(id: ID!): User!
+}
+
+input LoginCredentials {
+  usernameOrEmail: String!
+  password: String!
+}
+
+type Mutation {
+  createUser(input: NewUser!): User!
+  updateUser(id: ID!, input: EditUser!): User!
+  deleteUser(id: ID!): Boolean!
+  registerUser(input: NewUser!): User!
+  loginUser(input: LoginCredentials!): Boolean!
+}
+
+input NewUser {
+  firstname: String!
+  lastname: String!
+  username: String!
+  email: String!
+  password: String!
+}
+
+type Query {
+  me: User
+  userByID(id: ID!): User!
+  users: [User!]
+  _entities(representations: [_Any!]!): [_Entity]!
+  _service: _Service!
+}
+
+enum Role {
+  ADMIN
+  USER
+  VENDOR
+}
+
+scalar Time
+
+type User {
+  id: ID!
+  firstname: String!
+  lastname: String!
+  username: String!
+  email: String!
+  role: Role!
+  createdAt: Time!
+  updatedAt: Time!
+  deletedAt: Time
+}

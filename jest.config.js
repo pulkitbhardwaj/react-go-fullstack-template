@@ -1,0 +1,21 @@
+module.exports = {
+  projects: [
+    "<rootDir>/apps/petricia/web",
+    "<rootDir>/libs/ui",
+    "<rootDir>/apps/petricia/mobile",
+    "<rootDir>/apps/petricia/desktop",
+    "<rootDir>/libs/mobile",
+    "<rootDir>/libs/ui/mobile",
+    "<rootDir>/libs/ui/common",
+    "<rootDir>/apps/pulkitbhardwaj/web",
+    "<rootDir>/apps/voice/ui/web",
+    "<rootDir>/libs/voice/ui/web",
+    "<rootDir>/apps/voice/web",
+    "<rootDir>/libs/voice/ui/web/webcam",
+    "<rootDir>/libs/petricia/ui/common",
+    "<rootDir>/libs/petricia/ui/web",
+    "<rootDir>/libs/ui/web",
+    "<rootDir>/apps/voice/api/gateway",
+    "<rootDir>/libs/graphql/client",
+  ],
+};

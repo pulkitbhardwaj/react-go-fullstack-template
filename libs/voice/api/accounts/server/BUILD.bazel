@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "server",
+    srcs = [
+        "middlewares.go",
+        "server.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/voice/api/accounts/server",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/voice/api/accounts/auth",
+        "//libs/voice/api/accounts/database",
+        "//libs/voice/api/accounts/dataloaders",
+        "//libs/voice/api/accounts/graph",
+        "//libs/voice/api/accounts/resolvers",
+        "//libs/voice/api/accounts/session",
+        "@com_github_99designs_gqlgen//graphql/handler",
+        "@com_github_99designs_gqlgen//graphql/playground",
+        "@com_github_gorilla_handlers//:handlers",
+        "@com_github_gorilla_mux//:mux",
+        "@com_github_rs_cors//:cors",
+    ],
+)

@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "database",
+    srcs = [
+        "database.go",
+        "user.service.go",
+    ],
+    importpath = "github.com/pulkitbhardwaj/incroy/libs/voice/api/accounts/database",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//libs/voice/api/accounts/entities",
+        "//libs/voice/api/accounts/inputs",
+        "@io_gorm_driver_postgres//:postgres",
+        "@io_gorm_gorm//:gorm",
+        "@org_golang_x_crypto//bcrypt",
+    ],
+)

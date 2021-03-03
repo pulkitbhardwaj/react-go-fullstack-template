@@ -1,0 +1,54 @@
+{
+  "npmScope": "incroy",
+  "affected": { "defaultBase": "master" },
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "accessToken": "MjRmZmQ4NzMtOGMyNy00ZWMzLTg0ODgtYjgwMDllZjM0NDU1fHJlYWQtd3JpdGU=",
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "petricia-web": { "tags": ["type:web", "react", "nextjs", "ui", "app"] },
+    "petricia-web-e2e": {
+      "tags": [],
+      "implicitDependencies": ["petricia-web"]
+    },
+    "ui-e2e": { "tags": [], "implicitDependencies": [] },
+    "petricia-mobile": { "tags": ["type:mobile", "react", "native", "ui"] },
+    "petricia-desktop": { "tags": ["type:desktop", "react", "electron", "ui"] },
+    "petricia-desktop-e2e": {
+      "tags": [],
+      "implicitDependencies": ["petricia-desktop"]
+    },
+    "ui-mobile": { "tags": ["type:ui", "react", "native", "ui"] },
+    "ui-common": { "tags": ["type:ui", "react", "hooks", "ui"] },
+    "pulkitbhardwaj-web": {
+      "tags": ["type:web", "react", "personal", "portfolio", "ui"]
+    },
+    "pulkitbhardwaj-web-e2e": {
+      "tags": [],
+      "implicitDependencies": ["pulkitbhardwaj-web"]
+    },
+    "voice-web": { "tags": ["type:web", "react", "ui"] },
+    "voice-web-e2e": { "tags": [], "implicitDependencies": ["voice-web"] },
+    "voice-ui-web": { "tags": ["type:ui", "react", "web", "ui"] },
+    "petricia-ui-common": { "tags": ["type:ui", "react"] },
+    "petricia-ui-web": { "tags": ["type:ui", "react", "web"] },
+    "ui-web": { "tags": ["type:ui", "react", "web"] },
+    "voice-api-gateway": { "tags": ["type:api", "graphql", "gateway"] },
+    "graphql-client": { "tags": ["type:data-access", "graphql", "client"] }
+  }
+}
